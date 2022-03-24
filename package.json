@@ -1,0 +1,12 @@
+{
+  "name": "@onur1/t",
+  "version": "0.0.0",
+  "description": "runtime type system",
+  "main": "t.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
