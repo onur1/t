@@ -8,13 +8,13 @@ const Number = x => typeof x === 'number' && x <= MAX_SAFE_INTEGER && x >= MIN_S
 
 const Integer = x => Number(x) && x === Math.floor(x)
 
-const UnknownStruct = x => Object.prototype.toString.call(x) === '[object Object]'
+const UnknownStruct = u => typeof u === 'object' && !Nil(u) && !UnknownList(u)
 
 const string = x => typeof x === 'string'
 
 const NonEmptyString = x => string(x) && x.length > 0
 
-const Nil = x => x == null
+const Nil = x => x === null
 
 const Undefined = u => u === void 0
 
@@ -39,7 +39,7 @@ const Struct = props => {
   }
 }
 
-const UnknownList = typeof isArray === 'function' ? isArray : Array.isArray
+const UnknownList = Array.isArray
 
 const List = item => u => UnknownList(u) && u.every(item)
 
@@ -71,7 +71,7 @@ const Union = codecs => u => codecs.some(type => type(u))
 
 const Tuple = codecs => {
   const len = codecs.length
-  return u => unknownArray(u) && u.length === len && codecs.every((type, i) => type(u[i]))
+  return u => UnknownList(u) && u.length === len && codecs.every((type, i) => type(u[i]))
 }
 
 module.exports = {

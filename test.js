@@ -1,5 +1,5 @@
 const assert = require('assert')
-const t = require('./t')
+const t = require('.')
 
 const check = t.Union([
   t.Intersection([
@@ -34,3 +34,15 @@ assert.ok(check({
   d: [1, 2, 3],
 }) === false)
 
+const Foo = t.Intersection([
+  t.Struct({
+    bar: t.Literal('baz'),
+    qux: t.String,
+  }),
+  t.Partial({
+    quu: t.Number,
+    bla: t.Boolean,
+  })
+])
+
+assert.ok(Foo({ bar: 'baz', qux: 'xyz', quu: 2 }))

@@ -1,8 +1,9 @@
 {
   "name": "@onur1/t",
+  "private": true,
   "version": "0.0.0",
-  "description": "runtime type system",
-  "main": "t.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "node test.js"
   },
