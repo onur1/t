@@ -74,6 +74,16 @@ const Tuple = codecs => {
   return u => UnknownList(u) && u.length === len && codecs.every((type, i) => type(u[i]))
 }
 
+const EmptyList = val => t.UnknownList(val) && val.length === 0
+
+const NonEmptyList = val => t.UnknownList(val) && val.length > 0
+
+const False = val => val === false
+
+const True = val => val === true
+
+const Falsy = val => [t.Undefined, t.Nil, False].some(f => f(val))
+
 module.exports = {
   MIN_SAFE_INTEGER,
   MAX_SAFE_INTEGER,
@@ -94,4 +104,9 @@ module.exports = {
   Intersection,
   Union,
   Tuple,
+  EmptyList,
+  NonEmptyList,
+  False,
+  True,
+  Falsy,
 }
